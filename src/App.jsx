@@ -1,35 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { generateCatalogues } from "./libs/faker-data";
+import CatalogueList from "./components/CatalogueList";
+import {
+  Box,
+  Button,
+  Container,
+  HStack,
+  Icon,
+  Spacer,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
+import Navbar from "./components/Navbar";
+import { BsFilter } from "react-icons/bs";
+import CatalogueFilter from "./components/CatalogueFilter";
+import CatalogueDetail from "./components/CatalogueDetails";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const catalogue = generateCatalogues(100);
+  const catalogueDisc = useDisclosure();
+  const detailDisc = useDisclosure();
+  const [detail, setDetail] = useState(null);
+
+  const onDetailClick = (item) => {
+    detailDisc.onToggle();
+    setDetail(detail);
+  };
+
+  let ratioSize = "normal";
+
+  if (catalogueDisc.isOpen && detailDisc.isOpen) {
+    ratioSize = "small";
+  } else if (catalogueDisc.isOpen ^ detailDisc.isOpen) {
+    ratioSize = "large";
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <Container w={"full"} maxW={"full"}>
+        <HStack>
+          <Box
+            isOpen={catalogueDisc.isOpen}
+            onClose={catalogueDisc.onClose}
+            as={CatalogueFilter}
+            flexShrink={0}
+          />
+          <VStack pt={20}>
+            <HStack px={8} w={"full"}>
+              <Button
+                onClick={catalogueDisc.onToggle}
+                variant={"outline"}
+                rounded={0}
+                leftIcon={<Icon h={4} w={4} as={BsFilter} />}
+              >
+                Filter
+              </Button>
+            </HStack>
+            <CatalogueList
+              data={catalogue}
+              ratio={ratioSize}
+              onItemClick={onDetailClick}
+            />
+          </VStack>
+          <Box
+            isOpen={detailDisc.isOpen}
+            onClose={detailDisc.onClose}
+            as={CatalogueDetail}
+            flexShrink={0}
+          />
+        </HStack>
+      </Container>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

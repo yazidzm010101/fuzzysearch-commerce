@@ -24,7 +24,7 @@ function CatalogueDetail({ isOpen, onClose, ...rest }) {
         pos={"fixed"}
         top={0}
         right={isOpen ? 0 : "-" + width}
-        transition={"left .2s ease-in-out"}
+        transition={"right .2s ease-in-out"}
         pt={20}
       >
         <Button

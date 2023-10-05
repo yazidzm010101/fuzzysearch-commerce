@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { generateCatalogues } from "./libs/faker-data";
-import CatalogueList from "./components/CatalogueList";
+import { generateCatalogues } from "@/libs/faker-data";
+import CatalogueList from "@/components/CatalogueList";
 import {
   Box,
   Button,
   Container,
   HStack,
   Icon,
-  Spacer,
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
 import { BsFilter } from "react-icons/bs";
-import CatalogueFilter from "./components/CatalogueFilter";
-import CatalogueDetail from "./components/CatalogueDetails";
+import CatalogueFilter from "@/components/CatalogueFilter";
+import CatalogueDetail from "@/components/CatalogueDetails";
 
-function App() {
+function Index() {
   const catalogue = generateCatalogues(100);
   const catalogueDisc = useDisclosure();
   const detailDisc = useDisclosure();
@@ -46,7 +45,8 @@ function App() {
             as={CatalogueFilter}
             flexShrink={0}
           />
-          <VStack pt={20}>
+          <VStack pt={20} 
+      transition={"width .2s ease-in-out"}>
             <HStack px={8} w={"full"}>
               <Button
                 onClick={catalogueDisc.onToggle}
@@ -75,4 +75,4 @@ function App() {
   );
 }
 
-export default App;
+export default Index;

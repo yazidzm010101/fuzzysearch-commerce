@@ -19,7 +19,12 @@ function CatalogueList({ data, ratio = "normal", onItemClick }) {
       "full",
       `${(1 / 2) * 100}%`,
     ],
-    large: ["full", `${(1 / 2) * 100}%`, `${(1 / 3) * 100}%`],
+    large: [
+      "full",
+      `${(1 / 2) * 100}%`,
+      `${(1 / 2) * 100}%`,
+      `${(1 / 3) * 100}%`,
+    ],
   };
   console.log(ratio);
   const ratioSize = ratioMap[ratio] || [

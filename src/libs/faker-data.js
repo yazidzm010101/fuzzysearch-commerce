@@ -37,7 +37,9 @@ export function generateCatalogues(length) {
     const storage = oneOf([128, 256, 512, 1024]);
     const cpu_core = oneOf([2, 4, 6, 8, 12]);
     const cpu_base_speed = betweenNumber(200, 700) / 100;
-    const description = faker.commerce.productDescription();
+    const gpu_memory = oneOf([2, 4, 8, 16, 24, 32]);
+    const gpu_clock_speed = betweenNumber(700, 2500)
+    const description = faker.lorem.lines({min: 3, max: 6});
     data.push({
       name,
       image,
@@ -45,7 +47,9 @@ export function generateCatalogues(length) {
       ram,
       storage,
       cpu_core,
-      cpu_base: cpu_base_speed,
+      cpu_base_speed,
+      gpu_memory,
+      gpu_clock_speed,
       description,
     });
   }

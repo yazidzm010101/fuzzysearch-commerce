@@ -15,15 +15,16 @@ import { BsFilter } from "react-icons/bs";
 import CatalogueFilter from "@/components/CatalogueFilter";
 import CatalogueDetail from "@/components/CatalogueDetails";
 
+const catalogue = generateCatalogues(100);
+
 function Index() {
-  const catalogue = generateCatalogues(100);
   const catalogueDisc = useDisclosure();
   const detailDisc = useDisclosure();
   const [detail, setDetail] = useState(null);
 
   const onDetailClick = (item) => {
-    detailDisc.onToggle();
-    setDetail(detail);
+    detailDisc.onOpen();
+    setDetail(item);
   };
 
   let ratioSize = "normal";
@@ -37,40 +38,38 @@ function Index() {
   return (
     <>
       <Navbar />
-      <Container w={"full"} maxW={"full"}>
-        <HStack>
-          <Box
-            isOpen={catalogueDisc.isOpen}
-            onClose={catalogueDisc.onClose}
-            as={CatalogueFilter}
-            flexShrink={0}
+      <HStack>
+        <Box
+          isOpen={catalogueDisc.isOpen}
+          onClose={catalogueDisc.onClose}
+          as={CatalogueFilter}
+          flexShrink={0}
+        />
+        <VStack mt={'4rem'} py={5} transition={"width .2s ease-in-out"} maxH={"calc(100vh - 4rem)"} overflowY={"auto"}>
+          <HStack px={4} w={"full"}>
+            <Button
+              onClick={catalogueDisc.onToggle}
+              variant={"outline"}
+              rounded={0}
+              leftIcon={<Icon h={4} w={4} as={BsFilter} />}
+            >
+              Filter
+            </Button>
+          </HStack>
+          <CatalogueList
+            data={catalogue}
+            ratio={ratioSize}
+            onItemClick={onDetailClick}
           />
-          <VStack pt={20} 
-      transition={"width .2s ease-in-out"}>
-            <HStack px={8} w={"full"}>
-              <Button
-                onClick={catalogueDisc.onToggle}
-                variant={"outline"}
-                rounded={0}
-                leftIcon={<Icon h={4} w={4} as={BsFilter} />}
-              >
-                Filter
-              </Button>
-            </HStack>
-            <CatalogueList
-              data={catalogue}
-              ratio={ratioSize}
-              onItemClick={onDetailClick}
-            />
-          </VStack>
-          <Box
-            isOpen={detailDisc.isOpen}
-            onClose={detailDisc.onClose}
-            as={CatalogueDetail}
-            flexShrink={0}
-          />
-        </HStack>
-      </Container>
+        </VStack>
+        <Box
+          isOpen={detailDisc.isOpen}
+          onClose={detailDisc.onClose}
+          data={detail}
+          as={CatalogueDetail}
+          flexShrink={0}
+        />
+      </HStack>
     </>
   );
 }

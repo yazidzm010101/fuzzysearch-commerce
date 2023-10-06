@@ -37,7 +37,6 @@ function CatalogueList({ data, ratio = "normal", onItemClick }) {
     <Flex
       w={"full"}
       flexDir={"row"}
-      p={4}
       alignItems={"stretch"}
       flexWrap={"wrap"}
     >

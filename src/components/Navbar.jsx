@@ -18,7 +18,7 @@ function Navbar() {
         color={"red.500"}
         fontWeight={"extrabold"}
         left={"50%"}
-        fontSize={"xl"}
+        fontSize={{base: "sm", sm: "xl"}}
         pos={"absolute"}
         top={"50%"}
         textAlign={"center"}

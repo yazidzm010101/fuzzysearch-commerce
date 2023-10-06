@@ -39,6 +39,7 @@ function CatalogueFilter({ isOpen, onClose, ...rest }) {
         borderRight={"1px solid rgb(0 0 0 / 0.1)"}
         h={"100vh"}
         pos={"fixed"}
+        overflowY={"auto"}
         top={0}
         left={isOpen ? 0 : "-" + width}
         transition={"left .2s ease-in-out"}

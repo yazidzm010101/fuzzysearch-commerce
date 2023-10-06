@@ -34,6 +34,7 @@ function CatalogueDetail({ isOpen, onClose, data, ...rest }) {
         zIndex={998}
         w={width}
         maxW={"full"}
+        overflowY={"auto"}
         py={4}
         borderLeft={"1px solid rgb(0 0 0 / 0.1)"}
         h={"100vh"}

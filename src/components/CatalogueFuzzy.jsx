@@ -46,6 +46,7 @@ function CatalogueFuzzy({ isOpen, onClose, data, ...rest }) {
         py={4}
         borderLeft={"1px solid rgb(0 0 0 / 0.1)"}
         h={"100vh"}
+        overflowY={"auto"}
         pos={"fixed"}
         top={0}
         right={isOpen ? 0 : "-" + width}

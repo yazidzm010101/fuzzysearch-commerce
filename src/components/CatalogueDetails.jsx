@@ -7,15 +7,19 @@ import {
   Heading,
   Icon,
   Image,
+  Portal,
   Spacer,
   Text,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { BsX, BsFan } from "react-icons/bs";
 import { LuMemoryStick, LuHardDrive, LuCpu } from "react-icons/lu";
+import CatalogueFuzzy from "./CatalogueFuzzy";
 
 function CatalogueDetail({ isOpen, onClose, data, ...rest }) {
+  const fuzzyDisc = useDisclosure();
   const width = "400px";
   return (
     <Box
@@ -57,8 +61,18 @@ function CatalogueDetail({ isOpen, onClose, data, ...rest }) {
             <AspectRatio ratio={1} borderBottom={"1px solid rgb(0 0 0 / 0.1)"}>
               <Image p={4} src={data.image} style={{ objectFit: "contain" }} />
             </AspectRatio>
-            <Button rounded={0} bg={"orange.400"} pos={"absolute"} left={0} transform={"translateY(-100%)"}>
-              <VStack spacing={0} color={"white"}><Text>100</Text><Text fontSize={"10px"}>Fuzzy Score</Text></VStack>
+            <Button
+              rounded={0}
+              bg={"orange.400"}
+              pos={"absolute"}
+              left={0}
+              transform={"translateY(-100%)"}
+              onClick={()=> fuzzyDisc.onOpen()}
+            >
+              <VStack spacing={0} color={"white"}>
+                <Text>100</Text>
+                <Text fontSize={"10px"}>Fuzzy Score</Text>
+              </VStack>
             </Button>
             <VStack p={4} alignItems={"start"}>
               <Heading
@@ -74,7 +88,7 @@ function CatalogueDetail({ isOpen, onClose, data, ...rest }) {
               </Text>
               <Text color={"gray.600"}>{data.description}</Text>
             </VStack>
-            <Spacer as={'hr'} mx={6}/>
+            <Spacer as={"hr"} mx={6} />
             <VStack py={3} px={4} w={"full"} alignItems={"flex-start"}>
               <Text color={"gray.700"}>Specification</Text>
               <HStack w={"full"} alignItems="flex-start">
@@ -161,6 +175,13 @@ function CatalogueDetail({ isOpen, onClose, data, ...rest }) {
           </>
         )}
       </Box>
+      <Portal>
+        <CatalogueFuzzy
+          isOpen={fuzzyDisc.isOpen}
+          data={data}
+          onClose={fuzzyDisc.onClose}
+        />
+      </Portal>
     </Box>
   );
 }

@@ -57,7 +57,12 @@ function CatalogueDetail({ isOpen, onClose, data, ...rest }) {
       {data && (
         <>
           <AspectRatio ratio={1} borderBottom={"1px solid rgb(0 0 0 / 0.1)"}>
-            <Image p={4} src={data.image} style={{ objectFit: "contain" }} />
+            <Image
+              p={4}
+              src={data.image}
+              fallbackSrc="https://via.placeholder.com/100"
+              style={{ objectFit: "contain" }}
+            />
           </AspectRatio>
           {data.finalScore ? (
             <Button

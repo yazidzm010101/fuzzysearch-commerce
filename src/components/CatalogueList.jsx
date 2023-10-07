@@ -51,7 +51,11 @@ function CatalogueList({ data, ratio = "normal", onItemClick, activeItem }) {
             _hover={{ border: "1px solid orange", cursor: "pointer" }}
           >
             <AspectRatio w={"full"} ratio={4 / 3}>
-              <Image src={item.image} style={{ objectFit: "contain" }} />
+              <Image
+                src={item.image}
+                fallbackSrc={"https://via.placeholder.com/100"}
+                style={{ objectFit: "contain" }}
+              />
             </AspectRatio>
             {item.finalScore ? (
               <Box rounded={0} bg={"orange.400"} pos={"absolute"} left={0}>

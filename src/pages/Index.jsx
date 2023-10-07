@@ -7,6 +7,7 @@ import {
   Container,
   HStack,
   Icon,
+  Tag,
   Text,
   VStack,
   useDisclosure,
@@ -74,10 +75,25 @@ function Index() {
         >
           <HStack px={4} w={"full"}>
             <Button
+              pos={"relative"}
               onClick={filterDisc.onToggle}
               variant={"outline"}
               rounded={0}
-              leftIcon={<Icon h={4} w={4} as={BsFilter} />}
+              borderColor={
+                (Object.keys(filter).length > 0 && "orange") ||
+                "rgb(0 0 0 / 0.1)"
+              }
+              leftIcon={
+                <HStack>
+                  {Object.keys(filter).length > 0 && (
+                    <Tag bg={"orange"} rounded={0} color={"white"}>
+                      {catalogues.length}
+                    </Tag>
+                  )}
+                  <Icon h={4} w={4} as={BsFilter} />
+                </HStack>
+              }
+              pl={Object.keys(filter).length > 0 && 0}
             >
               Filter
             </Button>

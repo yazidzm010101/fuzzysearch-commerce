@@ -24,6 +24,7 @@ export function generateCatalogues(length) {
 
   let data = [];
   for (let i = 0; i < length; i++) {
+    const id = faker.database.mongodbObjectId();
     const price = betweenNumber(1500000, 20000000, 3);
     const name = [
       oneOf(fakeBrands),
@@ -38,9 +39,10 @@ export function generateCatalogues(length) {
     const cpu_core = oneOf([2, 4, 6, 8, 12]);
     const cpu_base_speed = betweenNumber(200, 700) / 100;
     const gpu_memory = oneOf([2, 4, 8, 16, 24, 32]);
-    const gpu_clock_speed = betweenNumber(700, 2500)
-    const description = faker.lorem.lines({min: 3, max: 6});
+    const gpu_clock_speed = betweenNumber(700, 2500);
+    const description = faker.lorem.lines({ min: 3, max: 6 });
     data.push({
+      id,
       name,
       image,
       price,

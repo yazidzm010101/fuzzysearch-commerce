@@ -1,16 +1,18 @@
 import {
   AspectRatio,
   Box,
+  Button,
   Flex,
   Heading,
   Image,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { number_format } from "../libs/text-utils";
+import { useCatalogues } from "@/hooks/catalogue-hook";
 
-function CatalogueList({ data, ratio = "normal", onItemClick }) {
+function CatalogueList({ data, ratio = "normal", onItemClick, activeItem }) {
   const ratioMap = {
     small: [
       "full",
@@ -33,25 +35,32 @@ function CatalogueList({ data, ratio = "normal", onItemClick }) {
     `${(1 / 4) * 100}%`,
   ];
   return (
-    <Flex
-      w={"full"}
-      flexDir={"row"}
-      alignItems={"stretch"}
-      flexWrap={"wrap"}
-    >
-      {data?.map((item, i) => (
-        <Box p={4} w={ratioSize}>
+    <Flex w={"full"} flexDir={"row"} alignItems={"stretch"} flexWrap={"wrap"}>
+      {data?.map((item) => (
+        <Box p={4} w={ratioSize} key={item.id}>
           <VStack
-            border={"1px solid rgb(0 0 0 / 0.1)"}
+            pos={"relative"}
             spacing={2}
             h={"full"}
             overflow={"hidden"}
+            border={
+              (item.id === activeItem.id && "1px solid orange") ||
+              "1px solid rgb(0 0 0 / 0.1)"
+            }
             onClick={() => onItemClick(item)}
             _hover={{ border: "1px solid orange", cursor: "pointer" }}
           >
             <AspectRatio w={"full"} ratio={4 / 3}>
               <Image src={item.image} style={{ objectFit: "contain" }} />
             </AspectRatio>
+            {item.finalScore ? (
+              <Box rounded={0} bg={"orange.400"} pos={"absolute"} left={0}>
+                <VStack spacing={0} color={"white"}>
+                  <Text>{Math.round(item.finalScore * 10000) / 100}</Text>
+                  <Text fontSize={"10px"}>Fuzzy Score</Text>
+                </VStack>
+              </Box>
+            ) : null}
             <VStack py={3} px={4} w={"full"} alignItems={"flex-start"}>
               <Heading
                 textAlign={"start"}

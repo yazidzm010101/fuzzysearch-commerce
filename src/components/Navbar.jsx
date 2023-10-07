@@ -1,5 +1,6 @@
-import { Container, Flex, HStack, Text } from "@chakra-ui/react";
+import { Container, Flex, HStack, Image, Text } from "@chakra-ui/react";
 import React from "react";
+import icon from "~/public/fuzzysearch-commerce.svg";
 
 function Navbar() {
   return (
@@ -7,25 +8,32 @@ function Navbar() {
       pos={"fixed"}
       top={0}
       left={0}
-      h={16}
+      h={14}
       w={"full"}
       maxW={"full"}
       zIndex={999}
-      bg={"gray.800"}
+      bg={"#0d0d27ff"}
       borderBottom={"1px solid rgb(0 0 0 / 0.1)"}
     >
-      <Text
-        color={"red.500"}
-        fontWeight={"extrabold"}
-        left={"50%"}
-        fontSize={{base: "sm", sm: "xl"}}
+      <HStack
         pos={"absolute"}
+        left={"50%"}
         top={"50%"}
-        textAlign={"center"}
         transform={"translate(-50%, -50%)"}
       >
-        FuzzySearch Commerce.
-      </Text>
+        <Image src={icon} w={8} h={8} />
+        <Text
+          color={"red.500"}
+          fontWeight={"extrabold"}
+          fontSize={{ base: "xs", sm: "md" }}
+          textAlign={"center"}
+          lineHeight={1}
+        >
+          FuzzySearch
+          <br />
+          Commerrce.
+        </Text>
+      </HStack>
     </Container>
   );
 }
